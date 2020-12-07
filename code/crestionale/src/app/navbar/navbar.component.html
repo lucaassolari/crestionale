@@ -1,1 +1,61 @@
-<p>navbar works!</p>
+<html class="has-navbar-fixed-top">
+    <nav class="navbar is-fixed-top is-transparent" role="navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" routerLink="/welcome" routerLinkActive="active">
+                <img src="../../assets/logos/app-logo.png" alt="app-logo" width="30" height="300">
+                <img class="ml-2" src="../../assets/logos/app-name.png" alt="app-name" width="112" height="28">
+            </a>
+            <a role="button" class="navbar-burger" #navBurger (click)="toggleNavbar()" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div class="navbar-menu" #navMenu>
+            <div class="navbar-start">
+                <a class="navbar-item" routerLink="/welcome" routerLinkActive="active">
+                    Home
+                </a>
+                <a class="navbar-item">
+                    Documentazione
+                </a>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        Altro
+                    </a>
+                    <div class="navbar-dropdown is-boxed">
+                        <a class="navbar-item">
+                          Contatti
+                        </a>
+                        <a class="navbar-item">
+                          Chi siamo
+                        </a>
+                        <a class="navbar-item is-active">
+                          Registra bambino
+                        </a>
+                        <a class="navbar-item is-active">
+                          Crea evento
+                        </a>
+                        <hr class="navbar-divider">
+                        <div class="navbar-item">
+                          Version 0.9.1
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                      <a class="button is-primary">
+                        <strong>Entra</strong>
+                      </a>
+                      <a class="button is-info">
+                        <strong>Registrati</strong>
+                      </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</html>
