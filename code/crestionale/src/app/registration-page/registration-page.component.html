@@ -1,0 +1,79 @@
+<div class="block">
+</div>    
+    
+<form #form="ngForm">
+    <div class="tile is-ancestor">
+    
+        <div class ="tile is-parent is-4"></div>
+        
+        <div class="tile is-parent is-vertical is-4">
+            
+            
+            <div class="tile is-child is-primary">
+                <div class="box">
+    
+                    <div class="field">
+                        <p class="control has-icons-left">
+                        <input [(ngModel)]="registerUserData.name" #name="ngModel" name="name" class="input" type="text" placeholder="Nome" required>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-user"></i>
+                        </span>
+                        </p>
+                    </div>
+    
+                    <div class="field">
+                        <p class="control has-icons-left">
+                        <input [(ngModel)]="registerUserData.surname" #surname="ngModel" name="surname" class="input" type="text" placeholder="Cognome" required>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-user"></i>
+                        </span>
+                        </p>
+                    </div>
+                    
+                    <div class="field">
+                        <p class="control has-icons-left">
+                        <input [(ngModel)]="registerUserData.email" #email="ngModel" name="email" class="input" type="email" placeholder="Email" required>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                        </p>
+                    </div>
+    
+                    <div class="field">
+                        <p class="control has-icons-left">
+                        <input [(ngModel)]="registerUserData.password" #password="ngModel" name="password" class="input" type="password" placeholder="Password" required>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                        </p>
+                    </div>
+                    
+                    <br>
+    
+                    <div class="control ml-5">
+                        <label class="radio">
+                            <input [(ngModel)]="registerUserData.role" type="radio" name="ruolo" value="bambino" >
+                            Bambino
+                        </label>
+                        <label class="radio">
+                            <input [(ngModel)]="registerUserData.role" #radio="ngModel" type="radio" name="ruolo" value="animatore" required>
+                            Animatore
+                        </label>
+                        <label class="radio">
+                            <input [(ngModel)]="registerUserData.role" type="radio" name="ruolo" value="Coordinatore" >
+                            Coordinatore
+                        </label>
+                    </div>
+    
+                </div>
+            </div>
+        
+            <div class="tile is-child">
+                <div class="buttons is-centered">
+                    <button (click)="registerUser()" class="button is-info" [disabled]="form.invalid">Registrati</button>
+                </div>
+            </div>
+    
+        </div>
+    </div>
+</form>
