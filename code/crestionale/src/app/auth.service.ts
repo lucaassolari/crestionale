@@ -24,6 +24,14 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
+  getIsAuth() {
+    return this.isAuthenticated
+  }
+
+  getAuthStatusListener() {
+    return this.authStatusListener.asObservable()
+  }
+
   registerUser(user) {
     this.http.post<any>(this._registerUrl, user)
       .subscribe(response => {
@@ -39,6 +47,44 @@ export class AuthService {
     return this.registrationStatusListener.asObservable()
   }
 
-  loginUser(user) {}
+  loginUser(user) {
+    this.http.post<{token: string, email: string, expiresIn: number}>(this._loginUrl, user)
+      .subscribe(response => {
+        const token = response.token
+        const email = user.email
+        this.token = token
+        this.email = email
+
+        // informiamo tutti gli interessati (iscritti all'observable) che siamo autenticati
+        if(token) { // se viene ritornato un token, se esiste
+          const expiresInDuration = response.expiresIn
+          this.setAuthTimer(expiresInDuration)
+          this.isAuthenticated = true
+          this.authStatusListener.next(true)
+          const now = new Date()
+          const expirationDate = new Date(now.getTime() + expiresInDuration * 1000)
+          this.saveAuthData(token, expirationDate, email)
+          this.router.navigate(['/welcome'])
+        }
+      },
+      error => {
+        console.log(error)
+      })
+  }
+
+  // metodo per salvare i dati che verrà chiamato nel login. Usiamo la data così non è relativa al momento di login
+  private saveAuthData(token: string, expirationDate: Date, email: string) {
+    localStorage.setItem('token', token) // chiave + argomento
+    localStorage.setItem('expirationDate', expirationDate.toISOString())
+    localStorage.setItem('email', email)
+  }
+
+  private setAuthTimer(duration: number) {
+    this.tokenTimer = window.setTimeout(() => { // funzione che viene eseguita quando scade il timer
+      this.logoutUser()
+    }, duration * 1000) // moltiplico per 1000 pechè funziona coi millisecondi
+  }
+
+  private logoutUser() {}
   
 }

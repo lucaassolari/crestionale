@@ -71,5 +71,37 @@ router.post('/register', (req, res) => {
         })    
 })
 
+// Richiesta di login, simile a quella di registrazione
+router.post('/login', (req, res) => { 
+    let userData = req.body
+
+    // Dobbiamo controllare se i dati dell'utente esistono nel database
+    User.findOne({ email: userData.email }).then(user => {
+        // Se non trova l'utente
+        if(!user) 
+            throw new Error('Auth failed')
+        return bcrypt.compare(userData.password, user.password)
+    })
+    .then(result => {
+        if(!result)
+            throw new Error('Auth failed')
+        
+        const token = jwt.sign(
+            {email: userData.email}, // metto anche l'id per recuperarlo nella prossima route
+            'thats_the_secret_key', 
+            {expiresIn: '1h'})
+        
+        res.status(200).json({
+            token: token,
+            email: userData.email,
+            expiresIn: 3600 // in secondi, tempo in cui il token scade
+        })
+    })
+    .catch(err => {
+        return res.status(401).json({message: 'Auth failed: something went wrong'})
+    })  
+
+})
+
 
 module.exports = router

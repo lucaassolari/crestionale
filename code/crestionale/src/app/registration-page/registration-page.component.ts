@@ -25,9 +25,8 @@ export class RegistrationPageComponent implements OnInit {
       .subscribe(res => {
         if(!res)
           console.log("ciao a tutti")
-        
-        this.registrationStatusListenerSubs.unsubscribe()
-          
+        else
+          this.registrationStatusListenerSubs.unsubscribe() 
       })
   }
 
