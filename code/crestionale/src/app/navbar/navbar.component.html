@@ -45,17 +45,20 @@
 
             </div>
             <div class="navbar-end">
-                <div class="navbar-item">
-                    <div class="buttons">
-                      <a class="button is-primary">
-                        <strong>Entra</strong>
-                      </a>
-                      <a class="button is-info">
-                        <strong>Registrati</strong>
-                      </a>
-                    </div>
-                </div>
-            </div>
+              <div class="navbar-item">
+                  <div class="buttons">
+                    <a *ngIf="!userIsAuthenticated" class="button is-primary" routerLink="/login">
+                      <strong>Entra</strong>
+                    </a>
+                    <a *ngIf="!userIsAuthenticated" class="button is-info" routerLink="/register">
+                      <strong>Registrati</strong>
+                    </a>
+                    <a *ngIf="userIsAuthenticated" class="button is-danger" (click)="onLogout()">
+                      <strong>Esci</strong>
+                    </a>
+                  </div>
+              </div>
+          </div>
         </div>
     </nav>
 </html>
