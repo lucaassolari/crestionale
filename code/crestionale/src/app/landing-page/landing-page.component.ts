@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-landing-page',
@@ -12,7 +13,7 @@ export class LandingPageComponent implements OnInit {
   userIsAuthenticated = false
   private authListenerSubs: Subscription
 
-  constructor(private _auth: AuthService) { }
+  constructor(private _auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     /*
@@ -27,6 +28,9 @@ export class LandingPageComponent implements OnInit {
       .subscribe(isAuthenticated => {
         this.userIsAuthenticated = isAuthenticated
       })
+
+    if(this.userIsAuthenticated)
+      this.router.navigate(['/home'])
   }
 
   ngOnDestroy() {

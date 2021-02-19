@@ -5,6 +5,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RegistrationPageComponent } from './registration-page/registration-page.component';
 import { AuthGuard } from './auth.guard';
+import { LogregGuard } from './logreg.guard'
 
 const routes: Routes = [
   {
@@ -14,15 +15,17 @@ const routes: Routes = [
   },
   {
     path: 'welcome',
-    component: LandingPageComponent
+    component: LandingPageComponent,
   },
   {
     path: 'register',
-    component: RegistrationPageComponent
+    component: RegistrationPageComponent,
+    canActivate: [LogregGuard]
   },
   {
     path: 'login',
-    component: LoginPageComponent
+    component: LoginPageComponent,
+    canActivate: [LogregGuard]
   },
   {
     path: 'home',
@@ -34,6 +37,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [AuthGuard]
+  providers: [AuthGuard, LogregGuard]
 })
 export class AppRoutingModule { }
