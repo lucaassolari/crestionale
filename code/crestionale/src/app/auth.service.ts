@@ -26,6 +26,7 @@ export class AuthService {
 
   // getters
   getIsAuth() {
+    console.log(this.isAuthenticated)
     return this.isAuthenticated
   }
 
@@ -90,7 +91,7 @@ export class AuthService {
           const now = new Date()
           const expirationDate = new Date(now.getTime() + expiresInDuration * 1000)
           this.saveAuthData(token, expirationDate, email)
-          this.router.navigate(['/welcome'])
+          this.router.navigate(['/home'])
         }
       },
       error => {
