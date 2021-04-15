@@ -79,12 +79,12 @@ router.post('/login', (req, res) => {
     User.findOne({ email: userData.email }).then(user => {
         // Se non trova l'utente
         if(!user) 
-            throw new Error('Auth failed')
+            throw new Error('User not exists')
         return bcrypt.compare(userData.password, user.password)
     })
     .then(result => {
         if(!result)
-            throw new Error('Auth failed')
+            throw new Error('Password wrong')
         
         const token = jwt.sign(
             {email: userData.email}, // metto anche l'id per recuperarlo nella prossima route
@@ -98,7 +98,7 @@ router.post('/login', (req, res) => {
         })
     })
     .catch(err => {
-        return res.status(401).json({message: 'Auth failed: something went wrong'})
+        return res.status(401).json({message: err.message})
     })  
 
 })

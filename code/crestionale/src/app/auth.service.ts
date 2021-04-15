@@ -67,10 +67,11 @@ export class AuthService {
           this.loginUser(user)
         }
         else {
+          console.log('ciao')
           this.registrationStatusListener.next(false)   
         }      
       })
-    
+
     return this.registrationStatusListener.asObservable()
   }
 
@@ -95,7 +96,7 @@ export class AuthService {
         }
       },
       error => {
-        console.log(error)
+        window.alert(error.error.message)
       })
   }
 
