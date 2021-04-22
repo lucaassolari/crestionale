@@ -11,7 +11,6 @@ export class RegistrationPageComponent implements OnInit {
 
   registerUserData : any = {}
   private registrationStatusListenerSubs: Subscription
-  i =0
   constructor(private _auth: AuthService) { }
 
   ngOnInit(): void {
@@ -23,8 +22,11 @@ export class RegistrationPageComponent implements OnInit {
     
     this.registrationStatusListenerSubs = this._auth.registerUser(this.registerUserData)
       .subscribe(res => {
-        if(!res)
+        if(!res) {
           window.alert("L'utente è già registrato")
+          this.registrationStatusListenerSubs.unsubscribe()
+        }
+          
         else
           this.registrationStatusListenerSubs.unsubscribe() 
       })

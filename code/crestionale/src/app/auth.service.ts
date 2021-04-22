@@ -66,10 +66,8 @@ export class AuthService {
           this.registrationStatusListener.next(true)
           this.loginUser(user)
         }
-        else {
-          console.log('ciao')
-          this.registrationStatusListener.next(false)   
-        }      
+        else 
+          this.registrationStatusListener.next(false)    
       })
 
     return this.registrationStatusListener.asObservable()
