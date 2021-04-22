@@ -17,6 +17,7 @@ export class AuthService {
   // subject per pushare le informazioni sull'atenticazione ai componenti interessati
   private authStatusListener = new Subject<boolean>()
   private registrationStatusListener = new Subject<boolean>()
+  private loginStatusListener = new Subject<string>()
   private isAuthenticated = false
 
   // dove immagazzinare il timer, perchè se faccio logout voglio poter pulire il valore
@@ -92,10 +93,13 @@ export class AuthService {
           this.saveAuthData(token, expirationDate, email)
           this.router.navigate(['/home'])
         }
+        this.loginStatusListener.next('') 
       },
       error => {
-        window.alert(error.error.message)
+        this.loginStatusListener.next(error.error.message) 
       })
+
+      return this.loginStatusListener.asObservable()
   }
 
   logoutUser() {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login-page',
@@ -9,6 +10,7 @@ import { AuthService } from '../auth.service';
 export class LoginPageComponent implements OnInit {
 
   loginUserData: any = {}
+  private loginStatusListenerSubs: Subscription
   
   constructor(private _auth: AuthService) { }
 
@@ -16,6 +18,12 @@ export class LoginPageComponent implements OnInit {
   }
 
   loginUser() {
-    this._auth.loginUser(this.loginUserData) 
+    this.loginStatusListenerSubs = this._auth.loginUser(this.loginUserData) 
+    .subscribe(res => {
+      if(res)
+        window.alert(res)
+        
+      this.loginStatusListenerSubs.unsubscribe()
+    }) 
   }
 }

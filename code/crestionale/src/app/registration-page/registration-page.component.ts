@@ -11,6 +11,7 @@ export class RegistrationPageComponent implements OnInit {
 
   registerUserData : any = {}
   private registrationStatusListenerSubs: Subscription
+  
   constructor(private _auth: AuthService) { }
 
   ngOnInit(): void {
