@@ -13,7 +13,7 @@
         </div>
         <div class="navbar-menu" #navMenu>
             <div class="navbar-start">
-                <a class="navbar-item" routerLink="/welcome" routerLinkActive="active">
+                <a class="navbar-item"  (click)="toggleNavbar()" routerLink="/welcome" routerLinkActive="active">
                     Home
                 </a>
                 <a class="navbar-item">
@@ -47,13 +47,13 @@
             <div class="navbar-end">
               <div class="navbar-item">
                   <div class="buttons">
-                    <a *ngIf="!userIsAuthenticated" class="button is-primary" routerLink="/login">
+                    <a *ngIf="!userIsAuthenticated" class="button is-primary" (click)="toggleNavbar()" routerLink="/login">
                       <strong>Entra</strong>
                     </a>
-                    <a *ngIf="!userIsAuthenticated" class="button is-info" routerLink="/register">
+                    <a *ngIf="!userIsAuthenticated" class="button is-info" (click)="toggleNavbar()" routerLink="/register">
                       <strong>Registrati</strong>
                     </a>
-                    <a *ngIf="userIsAuthenticated" class="button is-danger" (click)="onLogout()">
+                    <a *ngIf="userIsAuthenticated" class="button is-danger" (click)="toggleNavbar()" (click)="onLogout()">
                       <strong>Esci</strong>
                     </a>
                   </div>

@@ -21,7 +21,7 @@ const db = 'mongodb+srv://admin:admin@crestionaledb.qcw4s.mongodb.net/crestional
 * una funzione di callback che restituirà un errore se c'è stato un errore in connessione. Se è così,
 * if(err), stampo l'errore, altrimenti confermo l'avvenuta connessione.
 */
-mongoose.connect(db, err => {
+mongoose.connect(db, {useNewUrlParser: true}, err => {
     if(err) {
         console.log('Error: ' + err)
     }

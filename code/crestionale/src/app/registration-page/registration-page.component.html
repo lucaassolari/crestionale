@@ -31,12 +31,16 @@
                     </div>
                     
                     <div class="field">
-                        <p class="control has-icons-left">
-                        <input [(ngModel)]="registerUserData.email" #email="ngModel" name="email" class="input" type="email" placeholder="Email" required>
+                        <div class="control has-icons-left">
+                        <input *ngIf="!emailIsInvalid && !userAlreadyExists" [(ngModel)]="registerUserData.email" #email="ngModel" name="email" class="input" type="email" placeholder="Email" required>
+                        <input *ngIf="emailIsInvalid" [(ngModel)]="registerUserData.email" #email="ngModel" name="email" class="input is-danger" type="email" placeholder="Email" required>
+                        <p *ngIf="emailIsInvalid" class="help is-danger">L'indirizzo email inserito non è valido</p>
+                        <input *ngIf="userAlreadyExists" [(ngModel)]="registerUserData.email" #email="ngModel" name="email" class="input is-danger" type="email" placeholder="Email" required>
+                        <p *ngIf="userAlreadyExists" class="help is-danger">L'utente esiste già</p>
                         <span class="icon is-small is-left">
                             <i class="fas fa-envelope"></i>
                         </span>
-                        </p>
+                        </div>
                     </div>
     
                     <div class="field">
