@@ -185,5 +185,31 @@ router.post('/createevent', (req, res) => {
     })
 })
 
+router.post('/fetchevents', (req, res) => {
+
+    let userEmail = req.body
+    
+
+    Event.find({$or:[{team1: userEmail.email}, {team2: userEmail.email}, {team3: userEmail.email}, {team4: userEmail.email}]}).then(events => {
+        if(!events)
+            console.log('Oggi non hai nulla da fare, strano')
+        else {
+            let lista = []
+            
+            events.forEach(element => {
+                
+                let item = {
+                    'eventName': element.event_name,
+                    'eventHour': element.event_hour
+                }
+
+                lista.push(item)
+            })
+
+            res.status(200).json({result: lista})
+        }
+    })
+})
+
 
 module.exports = router
