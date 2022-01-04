@@ -103,5 +103,86 @@ router.post('/login', (req, res) => {
 
 })
 
+router.post('/createevent', (req, res) => {
+
+    let eventData = req.body
+    let found2 = false
+    let found3 = false
+    let found4 = false
+
+    if(!eventData.team2)
+        found2 = true
+    else {
+        User.findOne({email: eventData.team2}).then(user => {
+            if(!user)
+                found2 = false
+            else
+                found2 = true  
+        })
+    }
+
+    if(!eventData.team3)
+        found3 = true
+    else {
+        User.findOne({email: eventData.team3}).then(user => {
+            if(!user)
+                found3 = false
+            else
+                found3 = true  
+        })
+    }
+
+    if(!eventData.team4)
+        found4 = true
+    else {
+        User.findOne({email: eventData.team4}).then(user => {
+            if(!user)
+                found4 = false
+            else
+                found4 = true  
+        })
+    }
+
+    User.findOne({email: eventData.team1}).then(user => {
+        if(!user)
+            console.log('Non esiste nessun animatore con la prima mail specificata')
+        else {
+            if(found2 && found3 && found4) {
+                const event = new Event({
+                    event_name: eventData.event_name,
+                    team1: eventData.team1,
+                    team2: eventData.team2,
+                    team3: eventData.team3,
+                    team4: eventData.team4,
+                    event_hour: eventData.event_hour
+                })
+
+                event.save((error, registeredEvent) => {
+                    if(error) 
+                    console.log('Error: ' + error)
+                else 
+                    res.status(200).json({
+                        message: 'Event created',
+                        result: registeredEvent
+                    })
+                })
+            }
+            else {
+                if(!found2)
+                    console.log('Non esiste nessun animatore con la seconda mail specificata')
+                if(!found3)
+                    console.log('Non esiste nessun animatore con la terza mail specificata')
+                if(!found4)
+                    console.log('Non esiste nessun animatore con la quarta mail specificata')
+            }
+        }    
+        console.log(user)
+        console.log(found2)
+        console.log(eventData.team2)
+        console.log(found3)
+        console.log(found4)  
+    })
+})
+
 
 module.exports = router
