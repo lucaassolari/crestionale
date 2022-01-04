@@ -13,6 +13,7 @@ const mongoose = require('mongoose')
 
 // Import del modello di mongoose
 const User = require('../models/users') // il comando ../ è one folder up
+const Event = require('../models/events')
 
 const db = 'mongodb+srv://admin:admin@crestionaledb.qcw4s.mongodb.net/crestionaleDB?retryWrites=true&w=majority'
 
