@@ -6,6 +6,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { RegistrationPageComponent } from './registration-page/registration-page.component';
 import { AuthGuard } from './auth.guard';
 import { LogregGuard } from './logreg.guard'
+import { CreateEventComponent } from './create-event/create-event.component';
 
 const routes: Routes = [
   {
@@ -31,7 +32,11 @@ const routes: Routes = [
     path: 'home',
     component: HomePageComponent,
     canActivate: [AuthGuard] // authguard, così se scrivo /home nella barra indirizzi mi rimanda alla pagina di login
-  }
+  },
+  {
+    path: 'createevent',
+    component: CreateEventComponent
+  },
 ];
 
 @NgModule({
