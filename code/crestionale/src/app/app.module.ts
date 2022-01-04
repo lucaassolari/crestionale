@@ -14,6 +14,7 @@ import { RegistrationPageComponent } from './registration-page/registration-page
 import { LoginPageComponent } from './login-page/login-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { CreateEventComponent } from './create-event/create-event.component';
+import { EventListComponent } from './event-list/event-list.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { CreateEventComponent } from './create-event/create-event.component';
     LoginPageComponent,
     HomePageComponent,
     CreateEventComponent,
+    EventListComponent,
   ],
   imports: [
     BrowserModule,

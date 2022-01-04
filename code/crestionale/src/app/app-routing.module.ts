@@ -7,6 +7,7 @@ import { RegistrationPageComponent } from './registration-page/registration-page
 import { AuthGuard } from './auth.guard';
 import { LogregGuard } from './logreg.guard'
 import { CreateEventComponent } from './create-event/create-event.component';
+import { EventListComponent } from './event-list/event-list.component'
 
 const routes: Routes = [
   {
@@ -37,6 +38,10 @@ const routes: Routes = [
     path: 'createevent',
     component: CreateEventComponent
   },
+  {
+    path: 'eventlist',
+    component: EventListComponent
+  }
 ];
 
 @NgModule({
