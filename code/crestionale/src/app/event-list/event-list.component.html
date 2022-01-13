@@ -1,9 +1,9 @@
 <body>
-    <div *ngIf="!appealToggle">
+    <div *ngIf="!rollCallToggle">
         <div *ngIf="morningDone==1">
             <nav class="level my-4">
                 <div class="level-item">
-                    <a class="button is-primary is-large" (click)="toggleAppeal(0)">
+                    <a class="button is-primary is-large" (click)="toggleRollCall(0)">
                         <strong>Appello mattutino</strong>
                     </a>
                 </div>
@@ -12,7 +12,7 @@
         <div *ngIf="lunchDone==1">
             <nav class="level my-4">
                 <div class="level-item">
-                    <a class="button is-danger is-large" (click)="toggleAppeal(1)">
+                    <a class="button is-danger is-large" (click)="toggleRollCall(1)">
                         <strong>Appello mensa</strong>
                     </a>
                 </div>
@@ -21,17 +21,17 @@
         <div *ngIf="afternoonDone==1">
             <nav class="level my-4">
                 <div class="level-item">
-                    <a class="button is-info is-large" (click)="toggleAppeal(2)">
+                    <a class="button is-info is-large" (click)="toggleRollCall(2)">
                         <strong>Appello pomeridiano</strong>
                     </a>
                 </div>
             </nav>   
         </div>
     </div>
-    <div *ngIf="appealToggle">
+    <div *ngIf="rollCallToggle">
         <section class="section">
-            <app-appeal [userEmail]="userEmail" [appealType]="appealType" [(appealToggle)]="appealToggle"
-                [(morningDone)]="morningDone" [(lunchDone)]="lunchDone" [(afternoonDone)]="afternoonDone"></app-appeal>
+            <app-roll-call [userEmail]="userEmail" [rollCallType]="rollCallType" [(rollCallToggle)]="rollCallToggle"
+                [(morningDone)]="morningDone" [(lunchDone)]="lunchDone" [(afternoonDone)]="afternoonDone"></app-roll-call>
         </section> 
     </div>  
 

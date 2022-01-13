@@ -14,6 +14,7 @@ const mongoose = require('mongoose')
 // Import del modello di mongoose
 const User = require('../models/users') // il comando ../ è one folder up
 const Event = require('../models/events')
+const Child = require('../models/child')
 
 const db = 'mongodb+srv://admin:admin@crestionaledb.qcw4s.mongodb.net/crestionaleDB?retryWrites=true&w=majority'
 
@@ -132,6 +133,35 @@ router.post('/createchild', (req, res) => {
         }  
     })
     
+})
+
+router.post('/fetchchildren', (req, res) => {
+    
+    let userEmail = req.body
+
+    Child.find({coordinatedBy: userEmail.email}).then(children => {
+        if(!children) {
+            console.log('Non ti è stato assegnato nessun bambino')
+            res.status(401).json({
+                message: 'Error'
+            })
+        }
+        else {
+            let lista = []
+
+            children.forEach(element => {
+                let item = {
+                    'name': element.name,
+                    'surname': element.surname,
+                    'presenza': element.presenza,
+                    'presenza_in_mensa': element.presenza_in_mensa
+                }
+                lista.push(item)
+            });
+
+            res.status(200).json({result: lista})
+        }
+    })
 })
 
 router.post('/createevent', (req, res) => {

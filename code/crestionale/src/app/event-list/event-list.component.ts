@@ -27,29 +27,29 @@ export class EventListComponent implements OnInit {
   lunchDone : number
   afternoonDone : number
 
-  appealToggle : boolean = false
-  appealType : number 
+  rollCallToggle : boolean = false
+  rollCallType : number 
 
   constructor() { }
 
   ngOnInit(): void {
-    this.getAppealStatus()
+    this.getRollCallStatus()
     this.orderedEvents = this.orderEvents()
     this.getNextEvent()
     this.getFutureEvents()
   }
          
-  getAppealStatus() {
+  getRollCallStatus() {
     this.morningDone = parseInt(localStorage.getItem('morningDone')) || 0
     this.lunchDone = parseInt(localStorage.getItem('lunchDone')) || 0
     this.afternoonDone = parseInt(localStorage.getItem('afternoonDone')) || 0
   }
   
   orderEvents(): Object[] {
-    let hour : number = (new Date()).getHours()
+    let hour : number = (new Date()).getHours() -15
     let upcomingEvents = []
 
-    this.checkAppeal(hour)
+    this.checkRollCall(hour)
     
     this.inputEvents.forEach(element => {
       if(element.eventHour > hour)
@@ -95,7 +95,7 @@ export class EventListComponent implements OnInit {
       this.noFutureEvents = true
   }
 
-  checkAppeal(hour: number) {
+  checkRollCall(hour: number) {
 
     if(hour >= 9) {
       if(this.morningDone == 0)
@@ -114,9 +114,9 @@ export class EventListComponent implements OnInit {
         
   }
 
-  toggleAppeal(appealType: number) {
-    this.appealToggle = !this.appealToggle
-    this.appealType = appealType
+  toggleRollCall(rollCallType: number) {
+    this.rollCallToggle = !this.rollCallToggle
+    this.rollCallType = rollCallType
   }
   
 }

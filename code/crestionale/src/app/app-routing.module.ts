@@ -6,6 +6,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { RegistrationPageComponent } from './registration-page/registration-page.component';
 import { AuthGuard } from './auth.guard';
 import { LogregGuard } from './logreg.guard'
+import { CreateChildComponent } from './create-child/create-child.component';
 import { CreateEventComponent } from './create-event/create-event.component';
 import { EventListComponent } from './event-list/event-list.component'
 
@@ -33,6 +34,10 @@ const routes: Routes = [
     path: 'home',
     component: HomePageComponent,
     canActivate: [AuthGuard] // authguard, così se scrivo /home nella barra indirizzi mi rimanda alla pagina di login
+  },
+  {
+    path: 'createchild',
+    component: CreateChildComponent
   },
   {
     path: 'createevent',
