@@ -104,6 +104,36 @@ router.post('/login', (req, res) => {
 
 })
 
+router.post('/createchild', (req, res) => {
+
+    let childData = req.body
+    
+    User.findOne({email: childData.coordinatedBy}).then(user => {
+        if(!user) 
+            console.log('Non ho trovato un animatore')
+        else {
+            const child = new Child({
+                name: childData.name,
+                surname: childData.surname,
+                coordinatedBy: childData.coordinatedBy,
+                presenza: childData.presenza,
+                presenza_in_mensa: childData.presenza_in_mensa
+            })
+    
+            child.save((error, registeredChild) => {
+                if(error) 
+                    console.log('Error: ' + error)
+                else 
+                    res.status(200).json({
+                        message: 'User created',
+                        result: registeredChild
+                    })
+            })  
+        }  
+    })
+    
+})
+
 router.post('/createevent', (req, res) => {
 
     let eventData = req.body
