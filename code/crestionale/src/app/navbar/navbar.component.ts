@@ -32,6 +32,13 @@ export class NavbarComponent implements OnInit {
     this.navMenu.nativeElement.classList.toggle('is-active');
   }
 
+  resetRollCall() {
+    localStorage.setItem('morningDone', '0')
+    localStorage.setItem('lunchDone', '0')
+    localStorage.setItem('afternoonDone', '0')
+    location.reload()
+  }
+
   // devo disiscrivermi dall'observable quando il componente viene distrutto
   ngOnDestroy() {
     this.authListenerSubs.unsubscribe()
