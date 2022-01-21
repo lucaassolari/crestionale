@@ -14,7 +14,7 @@
     
                     <div class="field">
                         <p class="control has-icons-left">
-                        <input [(ngModel)]="registerUserData.name" #name="ngModel" name="name" class="input" type="text" placeholder="Nome" required>
+                        <input id="name-field" [(ngModel)]="registerUserData.name" #name="ngModel" name="name" class="input" type="text" placeholder="Nome" required>
                         <span class="icon is-small is-left">
                             <i class="fas fa-user"></i>
                         </span>
@@ -23,7 +23,7 @@
     
                     <div class="field">
                         <p class="control has-icons-left">
-                        <input [(ngModel)]="registerUserData.surname" #surname="ngModel" name="surname" class="input" type="text" placeholder="Cognome" required>
+                        <input id="surname-field" [(ngModel)]="registerUserData.surname" #surname="ngModel" name="surname" class="input" type="text" placeholder="Cognome" required>
                         <span class="icon is-small is-left">
                             <i class="fas fa-user"></i>
                         </span>
@@ -32,9 +32,9 @@
                     
                     <div class="field">
                         <div class="control has-icons-left">
-                        <input *ngIf="!emailIsInvalid && !userAlreadyExists" [(ngModel)]="registerUserData.email" #email="ngModel" name="email" class="input" type="email" placeholder="Email" required>
+                        <input id="email-field" *ngIf="!emailIsInvalid && !userAlreadyExists" [(ngModel)]="registerUserData.email" #email="ngModel" name="email" class="input" type="email" placeholder="Email" required>
                         <input *ngIf="emailIsInvalid" [(ngModel)]="registerUserData.email" #email="ngModel" name="email" class="input is-danger" type="email" placeholder="Email" required>
-                        <p *ngIf="emailIsInvalid" class="help is-danger">L'indirizzo email inserito non è valido</p>
+                        <p *ngIf="emailIsInvalid" id="invalid-email" class="help is-danger">L'indirizzo email inserito non è valido</p>
                         <input *ngIf="userAlreadyExists" [(ngModel)]="registerUserData.email" #email="ngModel" name="email" class="input is-danger" type="email" placeholder="Email" required>
                         <p *ngIf="userAlreadyExists" class="help is-danger">L'utente esiste già</p>
                         <span class="icon is-small is-left">
@@ -45,7 +45,7 @@
     
                     <div class="field">
                         <p class="control has-icons-left">
-                        <input [(ngModel)]="registerUserData.password" #password="ngModel" name="password" class="input" type="password" placeholder="Password" required>
+                        <input id="password-field" [(ngModel)]="registerUserData.password" #password="ngModel" name="password" class="input" type="password" placeholder="Password" required>
                         <span class="icon is-small is-left">
                             <i class="fas fa-lock"></i>
                         </span>
@@ -60,7 +60,7 @@
                             Bambino
                         </label>
                         <label class="radio">
-                            <input [(ngModel)]="registerUserData.role" #radio="ngModel" type="radio" name="ruolo" value="animatore" required>
+                            <input id="checkbox" [(ngModel)]="registerUserData.role" #radio="ngModel" type="radio" name="ruolo" value="animatore" required>
                             Animatore
                         </label>
                         <label class="radio">
