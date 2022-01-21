@@ -111,7 +111,9 @@ router.post('/createchild', (req, res) => {
     
     User.findOne({email: childData.coordinatedBy}).then(user => {
         if(!user) 
-            console.log('Non ho trovato un animatore')
+            res.json({
+                message: 'Errore: non esiste un animatore con questa mail',
+            })
         else {
             const child = new Child({
                 name: childData.name,
@@ -123,10 +125,12 @@ router.post('/createchild', (req, res) => {
     
             child.save((error, registeredChild) => {
                 if(error) 
-                    console.log('Error: ' + error)
+                    res.json({
+                        message: 'Errore nella creazione della scheda',
+                    })
                 else 
-                    res.status(200).json({
-                        message: 'User created',
+                    res.json({
+                        message: 'Scheda bambino creata',
                         result: registeredChild
                     })
             })  
@@ -206,7 +210,9 @@ router.post('/createevent', (req, res) => {
 
     User.findOne({email: eventData.team1}).then(user => {
         if(!user)
-            console.log('Non esiste nessun animatore con la prima mail specificata')
+            res.json({
+                message: 'Errore: non esiste nessun animatore con la prima mail specificata'
+            })
         else {
             if(found2 && found3 && found4) {
                 const event = new Event({
@@ -220,28 +226,25 @@ router.post('/createevent', (req, res) => {
 
                 event.save((error, registeredEvent) => {
                     if(error) 
-                    console.log('Error: ' + error)
+                        res.json({
+                            message: 'Errore nella creazione evento'
+                        })
                 else 
-                    res.status(200).json({
-                        message: 'Event created',
+                    res.json({
+                        message: 'Evento creato',
                         result: registeredEvent
                     })
                 })
             }
             else {
                 if(!found2)
-                    console.log('Non esiste nessun animatore con la seconda mail specificata')
-                if(!found3)
-                    console.log('Non esiste nessun animatore con la terza mail specificata')
-                if(!found4)
-                    console.log('Non esiste nessun animatore con la quarta mail specificata')
+                    res.json({ message: 'Errore: non esiste nessun animatore con la seconda mail specificata' })
+                else if(!found3)
+                    res.json({ message: 'Errore: non esiste nessun animatore con la terza mail specificata' })
+                else
+                    res.json({ message: 'Errore: non esiste nessun animatore con la quarta mail specificata' })
             }
-        }    
-        console.log(user)
-        console.log(found2)
-        console.log(eventData.team2)
-        console.log(found3)
-        console.log(found4)  
+        }     
     })
 })
 

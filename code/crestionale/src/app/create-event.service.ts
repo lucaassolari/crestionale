@@ -11,9 +11,9 @@ export class CreateEventService {
   constructor(private http: HttpClient) { }
 
   createEvent(event) {
-    this.http.post(this._createEventUrl, event)
+    this.http.post<any>(this._createEventUrl, event)
       .subscribe(response => {
-        console.log(response)
+        window.alert(response.message)
       })
   }
 }

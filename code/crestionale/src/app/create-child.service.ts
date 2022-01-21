@@ -12,9 +12,9 @@ export class CreateChildService {
   constructor(private http: HttpClient) { }
 
   createChild(child) {
-    this.http.post(this._createChildUrl, child)
+    this.http.post<any>(this._createChildUrl, child)
       .subscribe(response => {
-        console.log(response)
+        window.alert(response.message)
       })
   }
 }
