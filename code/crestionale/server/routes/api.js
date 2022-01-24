@@ -262,8 +262,8 @@ router.post('/fetchevents', (req, res) => {
             events.forEach(element => {
                 
                 let item = {
-                    'eventName': element.event_name,
-                    'eventHour': element.event_hour
+                    'event_name': element.event_name,
+                    'event_hour': element.event_hour
                 }
 
                 lista.push(item)

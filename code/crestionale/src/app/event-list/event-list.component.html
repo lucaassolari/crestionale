@@ -39,17 +39,17 @@
         <h1 class="title">Tra poco</h1>
         <div class="box">
             <div *ngIf="!noNextEvent; else elseBlock">
-                <nav class="level">
+                <nav id="next-event" class="level">
                     <div class="left-side">
-                        <div class="level-item"> {{ nextEvent.eventName }}</div>
+                        <div class="level-item"> {{ nextEvent.event_name }}</div>
                     </div>
                     <div class="right-side">
-                        <div class="level-item">{{ nextEvent.eventHour + ':00'}}</div>
+                        <div class="level-item">{{ nextEvent.event_hour + ':00'}}</div>
                     </div>
                 </nav>
             </div>
             <ng-template #elseBlock>
-                <nav class="level">
+                <nav id="no-next-event" class="level">
                     <div class="level-item">Non hai più nulla da fare per oggi!</div>
                 </nav>
             </ng-template>
@@ -63,10 +63,10 @@
                 <div class="box">
                     <nav class="level">
                         <div class="left-side">
-                            <div class="level-item">{{ event.eventName }}</div>
+                            <div class="level-item">{{ event.event_name }}</div>
                         </div>
                         <div class="right-side">
-                            <div class="level-item">{{ event.eventHour + ':00'}}</div>
+                            <div class="level-item">{{ event.event_hour + ':00'}}</div>
                         </div>
                     </nav>
                 </div> 

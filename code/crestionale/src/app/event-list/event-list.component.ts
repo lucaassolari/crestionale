@@ -52,7 +52,7 @@ export class EventListComponent implements OnInit {
     this.checkRollCall(hour)
     
     this.inputEvents.forEach(element => {
-      if(element.eventHour > hour)
+      if(element.event_hour > hour)
         upcomingEvents.push(element)
     });
 
@@ -63,7 +63,7 @@ export class EventListComponent implements OnInit {
       _switch = false
 
       for(let i = 0; i <= (upcomingEvents.length - 2); i++) {
-        if(upcomingEvents[i].eventHour > upcomingEvents[i + 1].eventHour) {
+        if(upcomingEvents[i].event_hour > upcomingEvents[i + 1].event_hour) {
           let temp = upcomingEvents[i]
           upcomingEvents[i] = upcomingEvents[i + 1]
           upcomingEvents[i + 1] = temp
