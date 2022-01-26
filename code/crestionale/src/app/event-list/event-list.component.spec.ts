@@ -2,7 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 import { DebugElement } from '@angular/core'
-import { By } from '@angular/platform-browser'
 import { EventListComponent } from './event-list.component'
 
 describe('EventListComponent', () => {
