@@ -46,7 +46,7 @@ export class EventListComponent implements OnInit {
   }
   
   orderEvents(): Object[] {
-    let hour : number = (new Date()).getHours()
+    let hour : number = (new Date()).getHours() - 20
     let upcomingEvents = []
 
     this.checkRollCall(hour)
@@ -56,20 +56,15 @@ export class EventListComponent implements OnInit {
         upcomingEvents.push(element)
     });
 
-    // Bubblesort
-    let _switch : boolean = true
-
-    while(_switch) {
-      _switch = false
-
-      for(let i = 0; i <= (upcomingEvents.length - 2); i++) {
-        if(upcomingEvents[i].event_hour > upcomingEvents[i + 1].event_hour) {
-          let temp = upcomingEvents[i]
-          upcomingEvents[i] = upcomingEvents[i + 1]
-          upcomingEvents[i + 1] = temp
-          _switch = true
-        }
+    // Insertion sort
+    for(let j = 1; j <= (upcomingEvents.length - 1); j++) {
+      let key = upcomingEvents[j]
+      let i = j - 1
+      while(i >= 0 && upcomingEvents[i].event_hour > key.event_hour) {
+        upcomingEvents[i + 1] = upcomingEvents[i]
+        i = i - 1
       }
+      upcomingEvents[i + 1] = key
     }
 
     return upcomingEvents
