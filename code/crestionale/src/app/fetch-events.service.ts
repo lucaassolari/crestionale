@@ -12,6 +12,6 @@ export class FetchEventsService {
   constructor(private http: HttpClient) { }
 
   fetchEvents(email: string): any {
-    return this.http.post(this._fetchEventsUrl, {email: email})
+    return this.http.get(this._fetchEventsUrl, {params: {email: email}})
   }
 }

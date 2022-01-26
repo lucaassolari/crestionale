@@ -139,11 +139,11 @@ router.post('/createchild', (req, res) => {
     
 })
 
-router.post('/fetchchildren', (req, res) => {
+router.get('/fetchchildren', (req, res) => {
     
-    let userEmail = req.body
+    let userEmail = req.query.email
 
-    Child.find({coordinatedBy: userEmail.email}).then(children => {
+    Child.find({coordinatedBy: userEmail}).then(children => {
         if(!children) {
             console.log('Non ti è stato assegnato nessun bambino')
             res.status(401).json({
@@ -248,12 +248,11 @@ router.post('/createevent', (req, res) => {
     })
 })
 
-router.post('/fetchevents', (req, res) => {
+router.get('/fetchevents', (req, res) => {
 
-    let userEmail = req.body
-    
+    let userEmail = req.query.email
 
-    Event.find({$or:[{team1: userEmail.email}, {team2: userEmail.email}, {team3: userEmail.email}, {team4: userEmail.email}]}).then(events => {
+    Event.find({$or:[{team1: userEmail}, {team2: userEmail}, {team3: userEmail}, {team4: userEmail}]}).then(events => {
         if(!events)
             console.log('Oggi non hai nulla da fare, strano')
         else {

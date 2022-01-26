@@ -12,6 +12,6 @@ export class FetchChildrenService {
   constructor(private http: HttpClient) { }
 
   fetchChildren(email: string): any {
-    return this.http.post(this._fetchChildrenUrl, {email: email})
+    return this.http.get(this._fetchChildrenUrl, {params: {email: email}})
   }
 }
