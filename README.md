@@ -11,7 +11,7 @@ After that, install [Angular CLI](https://angular.io/)
 ```sh
 $ npm install -g @angular/cli
 ```
-If you're a Windows user, you need to delete bcrypt folder inside code/crestionale/server/node_modules, and then execute npm install again.
+If you're a Windows user, you need to delete *bcrypt* folder inside *code/crestionale/server/node_modules*, and then execute **npm install** again.
 
 ## Usage
 
