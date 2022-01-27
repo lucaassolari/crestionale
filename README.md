@@ -7,12 +7,19 @@ This project uses [node](http://nodejs.org) and [npm](https://npmjs.com). Go che
 ```sh
 $ npm install
 ```
+After that, install [Angular CLI](https://angular.io/)
+```sh
+$ npm install -g @angular/cli
+```
+If you're a Windows user, you need to delete bcrypt folder inside code/crestionale/server/node_modules, and then execute npm install again.
 
 ## Usage
 
-This is only a documentation package. You can print out [spec.md](spec.md) to your console:
-
+To launch the client execute the following command
 ```sh
-$ standard-readme-spec
-# Prints out the standard-readme spec
+$ ng serve --open
+```
+To launch the server execute the following command
+```sh
+$ node server
 ```
