@@ -46,7 +46,7 @@ export class EventListComponent implements OnInit {
   }
   
   orderEvents(): Object[] {
-    let hour : number = (new Date()).getHours() - 20
+    let hour : number = (new Date()).getHours()
     let upcomingEvents = []
 
     this.checkRollCall(hour)
