@@ -1,0 +1,80 @@
+<body>
+    <div *ngIf="!rollCallToggle">
+        <div *ngIf="morningDone==1">
+            <nav class="level my-4">
+                <div class="level-item">
+                    <a class="button is-primary is-large" (click)="toggleRollCall(0)">
+                        <strong>Appello mattutino</strong>
+                    </a>
+                </div>
+            </nav> 
+        </div>
+        <div *ngIf="lunchDone==1">
+            <nav class="level my-4">
+                <div class="level-item">
+                    <a class="button is-danger is-large" (click)="toggleRollCall(1)">
+                        <strong>Appello mensa</strong>
+                    </a>
+                </div>
+            </nav> 
+        </div>
+        <div *ngIf="afternoonDone==1">
+            <nav class="level my-4">
+                <div class="level-item">
+                    <a class="button is-info is-large" (click)="toggleRollCall(2)">
+                        <strong>Appello pomeridiano</strong>
+                    </a>
+                </div>
+            </nav>   
+        </div>
+    </div>
+    <div *ngIf="rollCallToggle">
+        <section class="section">
+            <app-roll-call [userEmail]="userEmail" [rollCallType]="rollCallType" [(rollCallToggle)]="rollCallToggle"
+                [(morningDone)]="morningDone" [(lunchDone)]="lunchDone" [(afternoonDone)]="afternoonDone"></app-roll-call>
+        </section> 
+    </div>  
+
+    <section class="section">
+        <h1 class="title">Tra poco</h1>
+        <div class="box">
+            <div *ngIf="!noNextEvent; else elseBlock">
+                <nav id="next-event" class="level">
+                    <div class="left-side">
+                        <div class="level-item"> {{ nextEvent.event_name }}</div>
+                    </div>
+                    <div class="right-side">
+                        <div class="level-item">{{ nextEvent.event_hour + ':00'}}</div>
+                    </div>
+                </nav>
+            </div>
+            <ng-template #elseBlock>
+                <nav id="no-next-event" class="level">
+                    <div class="level-item">Non hai più nulla da fare per oggi!</div>
+                </nav>
+            </ng-template>
+        </div>
+    </section>
+    
+    <div *ngIf="!noFutureEvents">
+        <section class="section">
+            <h1 class="title">In seguito</h1>
+            <div *ngFor="let event of futureEvents">
+                <div class="box">
+                    <nav class="level">
+                        <div class="left-side">
+                            <div class="level-item">{{ event.event_name }}</div>
+                        </div>
+                        <div class="right-side">
+                            <div class="level-item">{{ event.event_hour + ':00'}}</div>
+                        </div>
+                    </nav>
+                </div> 
+                <div class="block"></div> 
+            </div>
+        </section>
+    </div>
+    
+    <br>
+
+</body>

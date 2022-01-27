@@ -1,0 +1,27 @@
+<h1 class="title">{{ roll_call_title }}</h1>
+
+<div *ngFor="let element of roll_call_list">
+    <div class="box mt-1">
+        <nav class="level">
+            <div class="left-side">
+                <div class="level-item">{{ element.name + " " + element.surname }}</div>
+            </div>
+            <div class="right-side">
+                <div class="level-item">
+                    <label class="checkbox">
+                        <input type="checkbox">
+                        Presente
+                      </label>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+<nav class="level mt-3">
+    <div class="level-item">
+        <a class="button is-primary" (click)="toggleRollCall(rollCallType)">
+            <strong>Ok</strong>
+        </a>
+    </div>
+</nav>
+

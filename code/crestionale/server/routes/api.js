@@ -13,6 +13,8 @@ const mongoose = require('mongoose')
 
 // Import del modello di mongoose
 const User = require('../models/users') // il comando ../ è one folder up
+const Event = require('../models/events')
+const Child = require('../models/child')
 
 const db = 'mongodb+srv://admin:admin@crestionaledb.qcw4s.mongodb.net/crestionaleDB?retryWrites=true&w=majority'
 
@@ -101,6 +103,174 @@ router.post('/login', (req, res) => {
         return res.status(401).json({message: err.message})
     })  
 
+})
+
+router.post('/createchild', (req, res) => {
+
+    let childData = req.body
+    
+    User.findOne({email: childData.coordinatedBy}).then(user => {
+        if(!user) 
+            res.json({
+                message: 'Errore: non esiste un animatore con questa mail',
+            })
+        else {
+            const child = new Child({
+                name: childData.name,
+                surname: childData.surname,
+                coordinatedBy: childData.coordinatedBy,
+                presenza: childData.presenza,
+                presenza_in_mensa: childData.presenza_in_mensa
+            })
+    
+            child.save((error, registeredChild) => {
+                if(error) 
+                    res.json({
+                        message: 'Errore nella creazione della scheda',
+                    })
+                else 
+                    res.json({
+                        message: 'Scheda bambino creata',
+                        result: registeredChild
+                    })
+            })  
+        }  
+    })
+    
+})
+
+router.get('/fetchchildren', (req, res) => {
+    
+    let userEmail = req.query.email
+
+    Child.find({coordinatedBy: userEmail}).then(children => {
+        if(!children) {
+            console.log('Non ti è stato assegnato nessun bambino')
+            res.status(401).json({
+                message: 'Error'
+            })
+        }
+        else {
+            let lista = []
+
+            children.forEach(element => {
+                let item = {
+                    'name': element.name,
+                    'surname': element.surname,
+                    'presenza': element.presenza,
+                    'presenza_in_mensa': element.presenza_in_mensa
+                }
+                lista.push(item)
+            });
+
+            res.status(200).json({result: lista})
+        }
+    })
+})
+
+router.post('/createevent', (req, res) => {
+
+    let eventData = req.body
+    let found2 = false
+    let found3 = false
+    let found4 = false
+
+    if(!eventData.team2)
+        found2 = true
+    else {
+        User.findOne({email: eventData.team2}).then(user => {
+            if(!user)
+                found2 = false
+            else
+                found2 = true  
+        })
+    }
+
+    if(!eventData.team3)
+        found3 = true
+    else {
+        User.findOne({email: eventData.team3}).then(user => {
+            if(!user)
+                found3 = false
+            else
+                found3 = true  
+        })
+    }
+
+    if(!eventData.team4)
+        found4 = true
+    else {
+        User.findOne({email: eventData.team4}).then(user => {
+            if(!user)
+                found4 = false
+            else
+                found4 = true  
+        })
+    }
+
+    User.findOne({email: eventData.team1}).then(user => {
+        if(!user)
+            res.json({
+                message: 'Errore: non esiste nessun animatore con la prima mail specificata'
+            })
+        else {
+            if(found2 && found3 && found4) {
+                const event = new Event({
+                    event_name: eventData.event_name,
+                    team1: eventData.team1,
+                    team2: eventData.team2,
+                    team3: eventData.team3,
+                    team4: eventData.team4,
+                    event_hour: eventData.event_hour
+                })
+
+                event.save((error, registeredEvent) => {
+                    if(error) 
+                        res.json({
+                            message: 'Errore nella creazione evento'
+                        })
+                else 
+                    res.json({
+                        message: 'Evento creato',
+                        result: registeredEvent
+                    })
+                })
+            }
+            else {
+                if(!found2)
+                    res.json({ message: 'Errore: non esiste nessun animatore con la seconda mail specificata' })
+                else if(!found3)
+                    res.json({ message: 'Errore: non esiste nessun animatore con la terza mail specificata' })
+                else
+                    res.json({ message: 'Errore: non esiste nessun animatore con la quarta mail specificata' })
+            }
+        }     
+    })
+})
+
+router.get('/fetchevents', (req, res) => {
+
+    let userEmail = req.query.email
+
+    Event.find({$or:[{team1: userEmail}, {team2: userEmail}, {team3: userEmail}, {team4: userEmail}]}).then(events => {
+        if(!events)
+            console.log('Oggi non hai nulla da fare, strano')
+        else {
+            let lista = []
+            
+            events.forEach(element => {
+                
+                let item = {
+                    'event_name': element.event_name,
+                    'event_hour': element.event_hour
+                }
+
+                lista.push(item)
+            })
+
+            res.status(200).json({result: lista})
+        }
+    })
 })
 
 

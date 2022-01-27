@@ -1,0 +1,92 @@
+<div class="block">
+</div>    
+    
+<form #form="ngForm">
+    <div class="tile is-ancestor">
+        <div class ="tile is-parent is-3"></div>
+        <div class="tile is-parent is-vertical is-5">
+            <div class="tile is-child is-primary">
+                <div class="box">
+
+                    <div class="field">
+                        <p class="control has-icons-left">
+                        <input [(ngModel)]="eventData.event_name" #name="ngModel" name="name" class="input" type="text" placeholder="Nome dell'evento" required>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-dice"></i>
+                        </span>
+                        </p>
+                    </div>
+                    
+                    <div class="field">
+                        <p class="control has-icons-left">
+                        <input [(ngModel)]="eventData.team1" #email1="ngModel" name="email1" class="input" type="email" placeholder="Email del coordinatore della prima squadra" required>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                        </p>
+                    </div>
+                    
+                    <br>
+
+                    <div class="field">
+                        <p class="control has-icons-left">
+                        <input [(ngModel)]="eventData.team2" #email2="ngModel" name="email2" class="input" type="email" placeholder="Email del coordinatore della seconda squadra">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                        </p>
+                    </div>
+
+                    <div class="field">
+                        <p class="control has-icons-left">
+                        <input [(ngModel)]="eventData.team3" #email3="ngModel" name="email3" class="input" type="email" placeholder="Email del coordinatore della terza squadra">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                        </p>
+                    </div>
+
+                    <div class="field">
+                        <p class="control has-icons-left">
+                        <input [(ngModel)]="eventData.team4" #email4="ngModel" name="email4" class="input" type="email" placeholder="Email del coordinatore della quarta squadra">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                        </p>
+                    </div>
+
+                    <br>
+
+                    <div class="field">
+                        <div class="control has-icons-left">
+                            <div class="select">
+                            <select [(ngModel)]="eventData.event_hour" #hour="ngModel" name="hour" type="submit" required>
+                                <option value="" disabled selected>Orario dell'evento</option>
+                                <option value="9">09:00</option>
+                                <option value="10">10:00</option>
+                                <option value="11">11:00</option>
+                                <option value="14">14:00</option>
+                                <option value="15">15:00</option>
+                                <option value="16">16:00</option>
+                                <option value="17">17:00</option>
+                            </select>
+                            </div>
+                            <div class="icon is-small is-left">
+                            <i class="fas fa-clock"></i>
+                            </div>
+                        </div>
+                        </div>
+                    <br>
+
+                </div>
+            </div>
+        
+            <div class="tile is-child">
+                <div class="buttons is-centered">
+                    <button (click)="createEvent()" class="button is-info" [disabled]="form.invalid">Crea evento</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>

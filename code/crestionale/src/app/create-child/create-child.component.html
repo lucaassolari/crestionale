@@ -1,0 +1,85 @@
+<div class="block">
+</div>    
+    
+<form #form="ngForm">
+    <div class="tile is-ancestor">
+    
+        <div class ="tile is-parent is-3"></div>
+        
+        <div class="tile is-parent is-vertical is-5">
+            
+            
+            <div class="tile is-child is-primary">
+                <div class="box">
+    
+                    <div class="field">
+                        <p class="control has-icons-left">
+                        <input [(ngModel)]="childData.name" #name="ngModel" name="name" class="input" type="text" placeholder="Nome" required>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-user"></i>
+                        </span>
+                        </p>
+                    </div>
+    
+                    <div class="field">
+                        <p class="control has-icons-left">
+                        <input [(ngModel)]="childData.surname" #surname="ngModel" name="surname" class="input" type="text" placeholder="Cognome" required>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-user"></i>
+                        </span>
+                        </p>
+                    </div>
+                    
+                    <div class="field">
+                        <p class="control has-icons-left">
+                        <input [(ngModel)]="childData.coordinatedBy" #email="ngModel" name="email" class="input" type="email" placeholder="Email del tuo animatore" required>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                        </p>
+                    </div>
+                    
+                    <br>
+    
+                    <p>Che tipo di giornata fai?</p>
+                    <div class="control">
+                        <label class="radio">
+                            <input [(ngModel)]="childData.presenza" type="radio" name="presenza" value="0" required>
+                            Solo mattina
+                        </label>
+                        <label class="radio">
+                            <input [(ngModel)]="childData.presenza" #radio="ngModel" type="radio" name="presenza" value="1" required>
+                            Solo pomeriggio
+                        </label>
+                        <label class="radio">
+                            <input [(ngModel)]="childData.presenza" type="radio" name="presenza" value="2" required>
+                            Mattina e pomeriggio
+                        </label>
+                    </div>
+
+                    <br>
+
+                    <p class="text-is-centered">Ti fermi a mangiare in mensa?</p>
+                    <div class="control">
+                        <label class="radio">
+                            <input [(ngModel)]="childData.presenza_in_mensa" type="radio" name="presenza_in_mensa" value="true" required>
+                            Sì
+                        </label>
+                        <label class="radio">
+                            <input [(ngModel)]="childData.presenza_in_mensa" #radio="ngModel" type="radio" name="presenza_in_mensa" value="false" required>
+                            No
+                        </label>
+                    </div>
+    
+                </div>
+            </div>
+        
+            <div class="tile is-child">
+                <div class="buttons is-centered">
+                    <button (click)="createChild()" class="button is-info" [disabled]="form.invalid">Registrati</button>
+                </div>
+            </div>
+    
+        </div>
+    </div>
+</form>

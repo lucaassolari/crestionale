@@ -13,6 +13,10 @@ import { FooterComponent } from './footer/footer.component';
 import { RegistrationPageComponent } from './registration-page/registration-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { CreateEventComponent } from './create-event/create-event.component';
+import { EventListComponent } from './event-list/event-list.component';
+import { CreateChildComponent } from './create-child/create-child.component';
+import { RollCallComponent } from './roll-call/roll-call.component';
 
 
 @NgModule({
@@ -24,6 +28,10 @@ import { HomePageComponent } from './home-page/home-page.component';
     RegistrationPageComponent,
     LoginPageComponent,
     HomePageComponent,
+    CreateEventComponent,
+    EventListComponent,
+    CreateChildComponent,
+    RollCallComponent,
   ],
   imports: [
     BrowserModule,
